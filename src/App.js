@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import ReactGa from "react-ga";
+import { useEffect } from "react";
 function App() {
+  useEffect(() => {
+    ReactGa.initialize("UA-203769934-1");
+    ReactGa.pageview(window.location.pathname);
+  }, []);
+  const handleClick = () => {
+    ReactGa.event({
+      category: "Button",
+      action: "Dog Button clicked",
+    });
+  };
+  const handleClick2 = () => {
+    ReactGa.event({
+      category: "Button",
+      action: "Cat Button clicked",
+    });
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => handleClick()}>Dog</button>
+      <button onClick={() => handleClick2()}>Cat</button>
     </div>
   );
 }
